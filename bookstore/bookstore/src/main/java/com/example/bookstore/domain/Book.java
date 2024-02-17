@@ -18,8 +18,7 @@ public class Book {
     private String isbn;
     private double price;
 
-    // muutoksia tehdessä bash -> git add . -> git commit -m "updateNimi" -> git
-    // push
+    // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     public Book() {
     }
 
