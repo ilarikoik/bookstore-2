@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-// h2 tietokanta luo automaattisesti taulun tietokantaan
+
 public class Book {
 
     @Id
@@ -18,7 +18,6 @@ public class Book {
     private String isbn;
     private double price;
 
-    // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     public Book() {
     }
 
