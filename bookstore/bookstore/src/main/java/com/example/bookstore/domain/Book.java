@@ -5,12 +5,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity // mahdollistaa tietokantojen ja luokkien väliset suhteet
+// se kertoo Springille, että kyseessä oleva luokka vastaa tietokannassa olevaa
+// taulua. Se mahdollistaa tietokantojen ja Java-luokkien väliset suhteet
 
 public class Book {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id // primarykey luokalle
+    @GeneratedValue(strategy = GenerationType.AUTO) // miten primarykeyn id annetaan tässä automaattisesti
     private Long id;
     private String title;
     private String author;

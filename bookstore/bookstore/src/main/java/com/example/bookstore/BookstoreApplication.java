@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 @SpringBootApplication
 public class BookstoreApplication {
 
+	// auttaa tulostamaan konsoliin --> parempi kun syso kun saa INFO WARNING JA
+	// ERROR
 	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
 	public static void main(String[] args) {
@@ -23,7 +25,9 @@ public class BookstoreApplication {
 
 	}
 
-	@Bean
+	@Bean // ?
+	// CommandLineRunner on rajapinta, jonka avulla voit suorittaa koodia
+	// sovelluksen käynnistyksen jälkeen
 	public CommandLineRunner bookDemo(BookRepository repository) {
 		return (args) -> { // lambda ->
 			log.info("save a couple of books"); // log laittaa aikaleiman siihe lisäyksii
