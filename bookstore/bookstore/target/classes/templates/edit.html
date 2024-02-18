@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>kirja</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h3>edit book</h3>
+    <form action="" method="post" th:action="@{/update}" th:object="${book}"> <!-- th:action tietää ku painetaa buttonia vissii?  -->
+        <input type="hidden" th:field="*{id}"/>
+        <input type="text" th:field="*{title}" placeholder="title" />
+        <input type="text" th:field="*{author}" placeholder="author" />
+        <input type="text" th:field="*{publicationYear}" placeholder="year" />
+        <input type="text" th:field="*{isbn}" placeholder="isbn" />
+        <input type="text" th:field="*{price}" placeholder="price" />
+        <button>edit</button>
+    </form>
+</body>
+</html>

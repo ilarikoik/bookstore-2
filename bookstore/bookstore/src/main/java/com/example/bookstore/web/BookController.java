@@ -1,5 +1,7 @@
 package com.example.bookstore.web;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +42,18 @@ public class BookController {
     public String saveBook(Book book) {
         repository.save(book);
         return "redirect:allbooks";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editBook(@PathVariable Long id, Model model) {
+        model.addAttribute("book", repository.findById(id));
+        return "edit";
+    }
+
+    @RequestMapping(value = ("/update"), method = RequestMethod.POST)
+    public String updateBook(Book book) {
+        repository.save(book);
+        return "redirect:/allbooks";
     }
 
     @RequestMapping(value = ("/delete/{id}"), method = RequestMethod.GET)
