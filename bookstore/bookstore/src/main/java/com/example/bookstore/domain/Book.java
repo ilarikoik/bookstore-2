@@ -1,9 +1,13 @@
 package com.example.bookstore.domain;
 
+import org.hibernate.annotations.ManyToAny;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity // mahdollistaa tietokantojen ja luokkien väliset suhteet
 // se kertoo Springille, että kyseessä oleva luokka vastaa tietokannassa olevaa
@@ -19,6 +23,22 @@ public class Book {
     private int publicationYear;
     private String isbn;
     private double price;
+
+    @ManyToOne
+    @JoinColumn(name = "categoryid")
+    private Category category; // pitää olla getteri ja setteri myös
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public Book() {
     }

@@ -1,10 +1,10 @@
 package com.example.bookstore.domain;
 
-import org.hibernate.mapping.List;
+import java.util.List; // Correct import for List
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,6 +17,9 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long categoryid;
     private String category;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.EAGER)
+    private List<Book> books; // Use java.util.List for generics
 
     public Category() {
     }
@@ -41,20 +44,16 @@ public class Category {
         this.category = category;
     }
 
-    public Book getBook() {
-        return book;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private Book book;
 
     @Override
     public String toString() {
-        return "Category [categoryid=" + categoryid + ", category=" + category + ", book=" + book + "]";
+        return "Category [categoryid=" + categoryid + ", category=" + category + ", books=" + books + "]";
     }
-
 }
