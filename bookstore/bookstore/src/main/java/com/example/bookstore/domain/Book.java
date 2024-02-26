@@ -43,13 +43,14 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String author, int publicationYear, String isbn, double price) {
+    public Book(String title, String author, int publicationYear, String isbn, double price, Category category) {
         super();
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.price = price;
+        this.category = category;
     }
 
     public long getId() {
@@ -102,8 +103,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", publicationYear=" + publicationYear
-                + ", isbn=" + isbn + ", price=" + price + "]";
+        return "";
     }
-
 }

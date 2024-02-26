@@ -46,9 +46,10 @@ public class BookstoreApplication {
 			crepository.save(category3);
 			crepository.save(category4);
 
-			repository.save(new Book("eka", "Haaga", 2010, "91231", 29.49));
-			repository.save(new Book("toka", "Helia", 2002, "94912", 19.99));
-			repository.save(new Book("kolmas", "Koulu", 2024, "12412", 39.99));
+			repository.save(new Book("eka", "Haaga", 2010, "91231", 29.49, category1));
+			repository.save(new Book("toka", "Helia", 2002, "94912", 19.99, category2));
+			repository.save(new Book("kolmas", "Koulu", 2024, "12412", 39.99, category3));
+			repository.save(new Book("neljäs", "kirjailija", 2023, "8788323", 39.99, category4));
 
 			log.info("fetch all Books"); // kaikki kirjat
 			for (Book book : repository.findAll()) {
