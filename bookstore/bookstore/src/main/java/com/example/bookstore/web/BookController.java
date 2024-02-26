@@ -40,6 +40,7 @@ public class BookController {
     @RequestMapping("/addbook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book()); // lähettää uuden tyhjän olion sivulle ?
+        model.addAttribute("categoriat", crepository.findAll());
         return "addbook";
     }
 
