@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
+import com.example.bookstore.domain.Category;
+import com.example.bookstore.domain.CategoryRepository;
 
 @Controller // kertoo springille että luokka tekee HTTP pyyntöjä/käskyjä
 public class BookController {
+    @Autowired // perjaatteessa importoi repon luokan käyttöön
+    private CategoryRepository crepository;
     @Autowired // perjaatteessa importoi repon luokan käyttöön
     private BookRepository repository;
 
@@ -60,6 +64,24 @@ public class BookController {
     public String requestMethodName(@PathVariable("id") Long id, Model model) {
         repository.deleteById(id);
         return "redirect:../allbooks";
+    }
+
+    @RequestMapping(value = ("/categories"), method = RequestMethod.GET)
+    public String requestMethodName(Model model) {
+        model.addAttribute("categoriess", crepository.findAll());
+        return "categorylist";
+    }
+
+    @RequestMapping("/addcategoryform")
+    public String addCategory(Model model) {
+        model.addAttribute("ccategory", new Category());
+        return "addcategory";
+    }
+
+    @RequestMapping(value = ("/savecategory"), method = RequestMethod.POST)
+    public String saveCategory(@ModelAttribute("ccategory") Category ccategory) {
+        crepository.save(ccategory);
+        return "redirect:/categories";
     }
 
 }

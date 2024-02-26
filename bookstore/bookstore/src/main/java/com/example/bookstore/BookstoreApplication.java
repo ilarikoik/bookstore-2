@@ -21,8 +21,6 @@ import org.slf4j.LoggerFactory;
 @SpringBootApplication
 public class BookstoreApplication {
 
-	@Autowired
-	private CategoryRepository crepository;
 	// auttaa tulostamaan konsoliin --> parempi kun syso kun saa INFO WARNING JA
 	// ERROR
 	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
