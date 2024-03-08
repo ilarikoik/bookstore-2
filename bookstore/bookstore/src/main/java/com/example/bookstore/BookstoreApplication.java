@@ -61,7 +61,6 @@ public class BookstoreApplication {
 			}
 
 			log.info("kaikki kategoriat");
-
 			for (Category category : crepository.findAll()) {
 				// Accessing books within the transactional context
 				log.info(category.toString());

@@ -2,6 +2,8 @@ package com.example.bookstore.domain;
 
 import java.util.List; // Correct import for List
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,7 +20,12 @@ public class Category {
     private Long categoryid;
     private String category;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.EAGER)
+    @JsonIgnore
+    // ignoraa book luokan ja estää ikuisen loopin tai jotai semmosta ( jos kokeilee
+    // ilman tota niin tulee yks kategoria ja yks kirja vaa loopilla array arrayn
+    // sisää)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.EAGER) // yhellä kategorialla monta
+                                                                                          // kirjaa
     private List<Book> books; // Use java.util.List for generics
 
     public Category() {

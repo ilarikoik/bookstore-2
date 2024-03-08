@@ -12,6 +12,10 @@
         <input type="text" th:field="*{publicationYear}" placeholder="year" required/>
         <input type="text" th:field="*{isbn}" placeholder="isbn" required/>
         <input type="text" th:field="*{price}" placeholder="price" required/>
+
+        <select th:field="*{category}">
+            <option th:each="category : ${categoriat}" th:value="${category}" th:text="${category.category}"></option>
+        </select>
         <button>lisää</button>
     </form>
 </body>

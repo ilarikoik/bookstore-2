@@ -24,6 +24,7 @@ public class Book {
     private String isbn;
     private double price;
 
+    // täällä ei oo ignorejson niin se lisää jokaiselle kirjalle myös katergorian
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category; // pitää olla getteri ja setteri myös
