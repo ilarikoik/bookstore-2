@@ -6,7 +6,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h3>books</h3>
+    <div>
+        <!-- näyttää käyttäjän nimen -->
+        <h2>Hello <span sec:authentication="name"></span>!</h2>
+    <p>all books</p>
+    
+    <!-- springbootilal on oma logout, määritetty webSecurityCongfig -->
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="SignOut" class="btn btn-sm btn-danger">
+        </form>
+    </div>
 
     <table class="table table-striped">
         <tr>
@@ -30,5 +39,6 @@
     </table>
     <br>
     <a th:href="@{/addbook}" class="btn btn-success">add book</a>
+    <a th:href="@{/addcategoryform}" class="btn btn-success">add category</a>
 </body>
 </html>

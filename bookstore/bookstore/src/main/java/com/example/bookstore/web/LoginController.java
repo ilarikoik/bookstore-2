@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,31 +21,27 @@ import com.example.bookstore.domain.BookRepository;
 import com.example.bookstore.domain.Category;
 import com.example.bookstore.domain.CategoryRepository;
 
+import com.example.bookstore.domain.BookRepository;
+
 @Controller
-public class CategoryContoller {
+public class LoginController {
+
     @Autowired
-    private CategoryRepository crepository;
+    private BookRepository repository;
 
-    @RequestMapping(value = "/api/categories", method = RequestMethod.GET)
-    public @ResponseBody List<Category> categoryRest() {
-        return (List<Category>) crepository.findAll();
+    @RequestMapping(value = { ("/login") }, method = RequestMethod.GET)
+    public String login() {
+        return "loginpage";
     }
 
-    @RequestMapping(value = ("/categories"), method = RequestMethod.GET)
-    public String requestMethodName(Model model) {
-        model.addAttribute("categoriess", crepository.findAll());
-        return "categorylist";
-    }
+    /*
+     * @PreAuthorize("hasRole('ADMIN')")
+     * 
+     * @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+     * public String deleteStudent(@PathVariable("id") Long bookId, Model model) {
+     * repository.deleteById(bookId);
+     * return "redirect:../allbooks";
+     * }
+     */
 
-    @RequestMapping("/addcategoryform")
-    public String addCategory(Model model) {
-        model.addAttribute("ccategory", new Category());
-        return "addcategory";
-    }
-
-    @RequestMapping(value = ("/savecategory"), method = RequestMethod.POST)
-    public String saveCategory(@ModelAttribute("ccategory") Category ccategory) {
-        crepository.save(ccategory);
-        return "redirect:/allbooks";
-    }
 }

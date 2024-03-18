@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
 import com.example.bookstore.domain.Category;
 import com.example.bookstore.domain.CategoryRepository;
+import com.example.bookstore.domain.UserRepository;
 
 @Controller // kertoo springille että luokka tekee HTTP pyyntöjä/käskyjä
 public class BookController {
@@ -28,18 +30,21 @@ public class BookController {
 
     @Autowired
     private CategoryRepository crepository;
+    @Autowired
+    private UserRepository urepository;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String showIndex(/* Model model */) {
         return "index";
     }
 
-    @RequestMapping(value = "/booksjson", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/books", method = RequestMethod.GET)
     public @ResponseBody List<Book> bookRest() {
         return (List<Book>) repository.findAll();
     }
 
-    @RequestMapping(value = "/booksjson/{id}", method = RequestMethod.GET)
+    // Optional<Book> estää errorin jos id ei löydy vissiin
+    @RequestMapping(value = "/api/books/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Book> bookRestById(@PathVariable("id") Long id) {
         return repository.findById(id);
     }
@@ -58,13 +63,14 @@ public class BookController {
     }
 
     @RequestMapping(value = ("/save"), method = RequestMethod.POST)
-    public String saveBook(Book book) {
+    public String saveBook(@ModelAttribute("book") Book book) {
         repository.save(book);
-        return "redirect:allbooks";
+        return "redirect:/allbooks";
     }
 
     @GetMapping("/edit/{id}")
     public String editBook(@PathVariable Long id, Model model) {
+        model.addAttribute("categoriat", crepository.findAll());
         model.addAttribute("book", repository.findById(id));
         return "edit";
     }
@@ -75,6 +81,7 @@ public class BookController {
         return "redirect:/allbooks";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = ("/delete/{id}"), method = RequestMethod.GET)
     public String requestMethodName(@PathVariable("id") Long id, Model model) {
         repository.deleteById(id);

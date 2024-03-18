@@ -5,14 +5,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
 import com.example.bookstore.domain.Category;
 import com.example.bookstore.domain.CategoryRepository;
+import com.example.bookstore.domain.UserRepository;
 
 import jakarta.transaction.Transactional;
 
+import com.example.bookstore.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -29,10 +32,13 @@ public class BookstoreApplication {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 
+	@Autowired
+
 	@Bean // ?
 	// CommandLineRunner on rajapinta, jonka avulla voit suorittaa koodia
 	// sovelluksen käynnistyksen jälkeen
-	public CommandLineRunner bookDemo(CategoryRepository crepository, BookRepository repository) {
+	public CommandLineRunner bookDemo(CategoryRepository crepository, BookRepository repository,
+			UserRepository urepository) {
 		return (args) -> { // lambda ->
 			log.info("save a couple of books"); // log laittaa aikaleiman siihe lisäyksii
 
@@ -59,6 +65,12 @@ public class BookstoreApplication {
 			for (Book book : repository.findByAuthor("Haaga")) {
 				log.info(book.toString());
 			}
+			User user1 = new User("user",
+					"$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+			User user2 = new User("admin",
+					"$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
 
 			log.info("kaikki kategoriat");
 			for (Category category : crepository.findAll()) {
@@ -70,6 +82,6 @@ public class BookstoreApplication {
 			}
 
 		};
-	}
 
+	}
 }

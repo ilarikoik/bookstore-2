@@ -13,6 +13,10 @@
         <input type="text" th:field="*{publicationYear}" placeholder="year" />
         <input type="text" th:field="*{isbn}" placeholder="isbn" />
         <input type="text" th:field="*{price}" placeholder="price" />
+        
+        <select th:field="*{category}">
+            <option th:each="category : ${categoriat}" th:value="${category}" th:text="${category.category}"></option>
+        </select>
         <button>edit</button>
     </form>
 </body>

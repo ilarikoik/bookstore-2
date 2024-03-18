@@ -24,21 +24,14 @@ public class Book {
     private String isbn;
     private double price;
 
-    // täällä ei oo ignorejson niin se lisää jokaiselle kirjalle myös katergorian
+    // täällä ei oo ignorejson
+    // niin kategoria lisätään jokaselle kirjalle Jsontiedostoon
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category; // pitää olla getteri ja setteri myös
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public Book() {
@@ -51,6 +44,14 @@ public class Book {
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.price = price;
+        this.category = category;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
         this.category = category;
     }
 
