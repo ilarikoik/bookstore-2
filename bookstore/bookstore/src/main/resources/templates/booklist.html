@@ -34,7 +34,7 @@
             <td th:text="${book.price}"></td>
             <td th:text="${book.category}"></td>
             <!-- sec:authorize="hasRole('ADMIN')" delte button hävii ku laittaa-->
-            <td ><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}" >delete</a></td>
+            <td  ><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}" >delete</a></td>
             <td><a th:href="@{/edit/{id}(id=${book.id})}">edit</a></td>
         </tr>
     </table>

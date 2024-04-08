@@ -23,6 +23,8 @@ import com.example.bookstore.domain.Category;
 import com.example.bookstore.domain.CategoryRepository;
 import com.example.bookstore.domain.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller // kertoo springille että luokka tekee HTTP pyyntöjä/käskyjä
 public class BookController {
     @Autowired // perjaatteessa importoi repon luokan käyttöön
@@ -32,6 +34,9 @@ public class BookController {
     private CategoryRepository crepository;
     @Autowired
     private UserRepository urepository;
+
+    @Autowired
+    private HttpSession session;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String showIndex(/* Model model */) {
@@ -64,6 +69,10 @@ public class BookController {
 
     @RequestMapping(value = ("/save"), method = RequestMethod.POST)
     public String saveBook(@ModelAttribute("book") Book book) {
+        /*
+         * Category ca = book.getCategory();
+         * crepository.save(ca);
+         */
         repository.save(book);
         return "redirect:/allbooks";
     }

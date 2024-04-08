@@ -6,16 +6,16 @@
 </head>
 <body>
     <h3>add book</h3>
-    <form action="" method="post" th:action="@{save}" th:object="${book}"> <!-- th:action tietää ku painetaa buttonia vissii?  -->
+    <form action="" method="post" th:action="@{/save}" th:object="${book}"> <!-- th:action tietää ku painetaa buttonia vissii?  -->
         <input type="text" th:field="*{title}" placeholder="title" required/>
         <input type="text" th:field="*{author}" placeholder="author" required/>
         <input type="text" th:field="*{publicationYear}" placeholder="year" required/>
         <input type="text" th:field="*{isbn}" placeholder="isbn" required/>
         <input type="text" th:field="*{price}" placeholder="price" required/>
 
-       <!--  <select th:field="*{category}" id="categoryid">
-            <option th:each="category : ${categoriat}" th:value="${category}" th:text="${category.category}"></option>
-        </select> -->
+        <select th:field="*{category}" id="categoryid">
+            <option th:each="category : ${categoriat}" th:value="${categoryid}" th:text="${category.category}"></option>
+        </select>
         <button>lisää</button>
     </form>
 </body>
